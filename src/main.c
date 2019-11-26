@@ -10,6 +10,50 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+struct ACCOUNT *head = NULL;
+
+void findUpdate(int account, float amount){
+	struct ACCOUNT *temp;
+	temp=head;
+	struct ACCOUNT *newnode;
+	int accountexist=0;
+	if(head==NULL){
+		//head->accountNumber=account;//create new node in this case malloc
+		//head->balance=amount;
+		head=(struc ACCOUNT*)malloc(sizeof(struc NODE));
+		head->accountNumber=account;
+		head->balance=amount;
+	}
+	else{//check if node exists
+		//temp->next->accountNumber=account;// if head not at null do i create new node and point temp to it
+		//temp->next->balance=amount;
+		temp=head;
+		while(temp!=NULL){//how to stop infinite loop
+			if(temp->next->accountNumber=account){
+				//update balance since account found
+				temp->next->balance=(temp->next->balance)+amount;
+				accountexist=1;//ie true
+				break;
+			}
+		}
+		if(accountexist==0){
+			newnode=(struct ACCOUNT*)malloc(sizeof(struct ACCOUNT));//created new node
+			newnode->accountNumber=account;
+			newnode->balance=amount;
+			temp->next=newnode;
+			newnode->next=NULL;
+		}
+		//if account does not exist
+
+	}
+
+}
+
+struct ACCOUNT {
+int accountNumber;
+float balance;
+struct ACCOUNT *next;
+};
 void parse(char record[],int *acct,float *amnt){
 	int j=0,i=0,k=0;
 							//ACCOUNT
@@ -154,7 +198,62 @@ int main(int argc, char* argv[]) {
 			char field2[300];
 			char field3[400];
 
-			PrintFile(s);
+			//PrintFile(s);
+			//PrintFile in main
+
+			char buffer[500];
+				char field11[300];
+				char field22[300];
+				char field33[400];
+				char c;
+				int record=1;
+				//double fieldTT;
+				float amount;
+				int account;
+				//double amount;
+				char emptyspace;
+
+
+				char * Transaction = "Transaction";
+				while ( !feof(s)){
+					printf("\n %c \n",c);
+
+						if (fgets(buffer,499,s) !=NULL && (c!='\n') && (buffer[0]!='\n'))
+						{
+
+
+							int i=0;
+
+							int *acct;
+							acct = (int*) malloc(2*sizeof(int));
+
+							float *amnt;
+							amnt = (float*) malloc(2*sizeof(float));
+
+
+
+							parse(buffer,acct,amnt);
+							amount=*amnt;
+							account=*acct;
+							printf("Account no %d: Transaction %.2f", *acct,*amnt);
+							i+=2;
+							memset(acct, 0, sizeof acct);
+							memset(amnt, 0.0, sizeof amnt);
+							memset(buffer, '\0', sizeof buffer);
+
+
+
+
+								account=-1;
+							//}
+						}
+				}
+
+			//Printfileinamin
+
+
 			fclose(s); //fclose(d);
+
 					return(0);
+
 }
