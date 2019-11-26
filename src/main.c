@@ -23,18 +23,25 @@ void findUpdate(int account, float amount){
 		head=(struc ACCOUNT*)malloc(sizeof(struc NODE));
 		head->accountNumber=account;
 		head->balance=amount;
+		head->next=NULL;
 	}
 	else{//check if node exists
 		//temp->next->accountNumber=account;// if head not at null do i create new node and point temp to it
 		//temp->next->balance=amount;
 		temp=head;
-		while(temp!=NULL){//how to stop infinite loop
+		while(temp->next!=NULL){//how to stop infinite loop
 			if(temp->next->accountNumber=account){
 				//update balance since account found
 				temp->next->balance=(temp->next->balance)+amount;
 				accountexist=1;//ie true
 				break;
 			}
+			temp=temp->next;//to go ahead. when we exit loop temp goes last node BUT we havent checked temp itself
+		}
+		//Now checking the temp(if reached where temp->next is null and loop stopped stopping checking)
+		if(temp->accountNumber=account){
+			temp->balance=(temp->balance)+amount;
+			accountexist=1;//ie true
 		}
 		if(accountexist==0){
 			newnode=(struct ACCOUNT*)malloc(sizeof(struct ACCOUNT));//created new node
