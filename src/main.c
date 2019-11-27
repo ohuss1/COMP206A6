@@ -10,6 +10,11 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+struct ACCOUNT {
+int accountNumber;
+float balance;
+struct ACCOUNT *next;
+};
 struct ACCOUNT *head = NULL;
 
 void findUpdate(int account, float amount){
@@ -20,7 +25,7 @@ void findUpdate(int account, float amount){
 	if(head==NULL){
 		//head->accountNumber=account;//create new node in this case malloc
 		//head->balance=amount;
-		head=(struc ACCOUNT*)malloc(sizeof(struc NODE));
+		head=(struct ACCOUNT*)malloc(sizeof(struct ACCOUNT));
 		head->accountNumber=account;
 		head->balance=amount;
 		head->next=NULL;
@@ -56,11 +61,17 @@ void findUpdate(int account, float amount){
 
 }
 
-struct ACCOUNT {
-int accountNumber;
-float balance;
-struct ACCOUNT *next;
-};
+void prettyPrint(){//linked list pretty printer
+	struct ACCOUNT *ptemp;
+		ptemp=head;
+		while(ptemp!=NULL){
+		 printf("ACCOUNT ID: %5d BALANCE: $ %6.2f", ptemp->accountNumber,ptemp->balance)
+				 ptemp=ptemp->next;
+		}
+}
+
+
+
 void parse(char record[],int *acct,float *amnt){
 	int j=0,i=0,k=0;
 							//ACCOUNT
@@ -242,15 +253,11 @@ int main(int argc, char* argv[]) {
 							parse(buffer,acct,amnt);
 							amount=*amnt;
 							account=*acct;
-							printf("Account no %d: Transaction %.2f", *acct,*amnt);
+							//printf("Account no %d: Transaction %.2f", *acct,*amnt);
 							i+=2;
 							memset(acct, 0, sizeof acct);
 							memset(amnt, 0.0, sizeof amnt);
 							memset(buffer, '\0', sizeof buffer);
-
-
-
-
 								account=-1;
 							//}
 						}
