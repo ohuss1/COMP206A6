@@ -8,6 +8,7 @@
 #ifndef LINKED_H_
 #define LINKED_H_
 void findUpdate(int account, float amount);
+void prettyPrint();
 
 
 #endif /* LINKED_H_ */

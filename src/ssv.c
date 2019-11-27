@@ -6,6 +6,8 @@
  */
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
+#include <string.h>
 
 void parse(char record[],int *acct,float *amnt){
 	int j=0,i=0,k=0;
