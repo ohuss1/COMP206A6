@@ -35,7 +35,7 @@ void findUpdate(int account, float amount){
 		//temp->next->balance=amount;
 		temp=head;
 		while(temp->next!=NULL){//how to stop infinite loop
-			if(temp->next->accountNumber=account){
+			if(temp->next->accountNumber==account){
 				//update balance since account found
 				temp->next->balance=(temp->next->balance)+amount;
 				accountexist=1;//ie true
@@ -44,7 +44,7 @@ void findUpdate(int account, float amount){
 			temp=temp->next;//to go ahead. when we exit loop temp goes last node BUT we havent checked temp itself
 		}
 		//Now checking the temp(if reached where temp->next is null and loop stopped stopping checking)
-		if(temp->accountNumber=account){
+		if(temp->accountNumber==account){
 			temp->balance=(temp->balance)+amount;
 			accountexist=1;//ie true
 		}
@@ -65,7 +65,7 @@ void prettyPrint(){//linked list pretty printer
 	struct ACCOUNT *ptemp;
 		ptemp=head;
 		while(ptemp!=NULL){
-		 printf("ACCOUNT ID: %5d BALANCE: $ %6.2f", ptemp->accountNumber,ptemp->balance)
+		 printf("ACCOUNT ID: %5d BALANCE: $ %6.2f \n", ptemp->accountNumber,ptemp->balance);
 				 ptemp=ptemp->next;
 		}
 }
@@ -253,6 +253,8 @@ int main(int argc, char* argv[]) {
 							parse(buffer,acct,amnt);
 							amount=*amnt;
 							account=*acct;
+							findUpdate(account,amount);
+
 							//printf("Account no %d: Transaction %.2f", *acct,*amnt);
 							i+=2;
 							memset(acct, 0, sizeof acct);
@@ -267,6 +269,7 @@ int main(int argc, char* argv[]) {
 
 
 			fclose(s); //fclose(d);
+			prettyPrint();
 
 					return(0);
 
